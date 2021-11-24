@@ -27,5 +27,5 @@ appoinmentSchema.pre('save', function(next){
     return next();
 })
 
-mongoose.model('appointments', appoinmentSchema)
+mongoose.model('Appointment', appoinmentSchema)
 
