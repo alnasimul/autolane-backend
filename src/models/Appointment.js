@@ -15,7 +15,11 @@ const appoinmentSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required:true
+        required: true
+    },
+    regNo:{
+        type: String,
+        required: true
     },
     address: {
         type: String,
