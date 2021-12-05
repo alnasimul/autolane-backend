@@ -5,10 +5,10 @@ const Appointment = mongoose.model('Appointment');
 const router = express.Router();
 
 router.post('/appointment', async (req, res) => {
-    const {date, customername, customeremail, address, phone, regNo} = req.body;
+    const {title, price, status, assigned, completed, date, customername, customeremail, address, phone, regNo} = req.body;
 
     try {
-        const appointment = new Appointment({date, customeremail, customername, phone, regNo, address});
+        const appointment = new Appointment({title, price, status, assigned, completed, date, customeremail, customername, phone, regNo, address});
 
         await appointment.save((err) => {
             if(err) res.send('Failed to save !')
@@ -20,6 +20,19 @@ router.post('/appointment', async (req, res) => {
     } catch (err) {
         return res.status(422).send(err.message);
     }
+})
+
+router.get('/appointments', async (req, res) => {
+    const appointments = await Appointment.find({})
+
+     res.status(200).send(appointments)
+
+    // console.log(appointments)
+
+    // Appointment.find({})
+    // .toArray((err, documents) => {
+    //     res.status(200).send(documents)
+    // })
 })
 
 module.exports = router;
