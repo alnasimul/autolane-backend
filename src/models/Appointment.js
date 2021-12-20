@@ -17,14 +17,34 @@ const appoinmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    regNo:{
+    regNo: {
         type: String,
         required: true
     },
     address: {
         type: String,
         required: true
-    }
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    status:{
+        type: Boolean,
+        required: true
+    },
+    assigned: {
+        type: Boolean,
+        required: true
+    },
+    delivered: {
+        type: Boolean,
+        required: true
+    },
 })
 
 appoinmentSchema.pre('save', function(next){
