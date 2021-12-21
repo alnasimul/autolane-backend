@@ -26,12 +26,14 @@ router.get('/appointments', async (req, res) => {
 
     res.status(200).send(appointments)
 
-    // console.log(appointments)
+})
 
-    // Appointment.find({})
-    // .toArray((err, documents) => {
-    //     res.status(200).send(documents)
-    // })
+router.get('/appointmentsByDate/:date', async (req, res) => {
+    const date = req.params.date
+    const appointments = await Appointment.find({date})
+
+    res.status(200).send(appointments)
+
 })
 
 router.patch('/updateCompletion/:id', async (req, res) => {
@@ -41,11 +43,25 @@ router.patch('/updateCompletion/:id', async (req, res) => {
     try {
         const response =  await Appointment.updateOne({ _id: id }, status)
 
-        const data = await response.acknowledged
-
-        console.log(data)
+        const data = response.acknowledged
 
         res.status(200).send(data)
+    } catch (error) {
+        
+    }
+})
+
+router.patch('/updatePayment/:id', async (req, res) => {
+    const id = req.params.id;
+    const status = req.body;
+
+    try {
+        const response = await Appointment.updateOne({ _id: id }, status)
+
+        const data = response.acknowledged
+
+        res.status(200).send(data)
+        
     } catch (error) {
         
     }
@@ -58,9 +74,8 @@ router.patch('/updateDelivery/:id', async (req, res) => {
     try {
         const response =  await Appointment.updateOne({ _id: id }, status)
 
-        const data = await response.acknowledged
+        const data = response.acknowledged
 
-        console.log(data)
 
         res.status(200).send(data)
     } catch (error) {
@@ -71,12 +86,10 @@ router.patch('/updateDelivery/:id', async (req, res) => {
 router.delete("/delete/:id", async (req, res) =>{
     const id = req.params.id;
 
-    console.log(id)
-
     try {
         const response = await Appointment.deleteOne({_id: id})
 
-        const data = await response;
+        const data = response;
 
         console.log( data.deletedCount > 0 )
 

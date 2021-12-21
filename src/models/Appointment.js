@@ -37,6 +37,10 @@ const appoinmentSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    paid: {
+        type: Boolean,
+        required: true
+    },
     assigned: {
         type: Boolean,
         required: true
