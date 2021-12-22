@@ -99,4 +99,17 @@ router.delete("/delete/:id", async (req, res) =>{
     }
 })
 
+
+router.get("/userAppointments/:email", async (req, res) => {
+    const email = req.params.email;
+
+    try {
+       const appointments = await Appointment.find({customeremail:email});
+
+       res.status(200).send(appointments)
+    } catch (error) {
+        
+    }
+})
+
 module.exports = router;
