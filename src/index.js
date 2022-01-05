@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const appointmentRoutes = require('../src/routes/appointmentRoutes');
+const userRoutes = require('./routes/userRoutes');
+const engineerRoutes = require('./routes/engineerRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -11,8 +13,13 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(appointmentRoutes);
+app.use(userRoutes);
+app.use(engineerRoutes);
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.66naq.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+
+
+
 
 mongoose.connect(uri);
 
