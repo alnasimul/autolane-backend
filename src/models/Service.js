@@ -1,14 +1,37 @@
 const mongoose = require("mongoose")
 
 const serviceSchema = new mongoose.Schema({
+    slug:{
+        type: String,
+        required: true
+    },
     title:{
         type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    excerpt: {
+        type: String,
+        required: true,
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    services:  {
+        type: Array,
         required: true
     }
 })
 
-serviceSchema.pre('save', function(next){
-    return next();
-})
 
-mongoose.model("Service", serviceSchema);
+const Service = new mongoose.model('Service', serviceSchema) ;
+
+module.exports = Service;
