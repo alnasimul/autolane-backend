@@ -45,6 +45,18 @@ router.get('/services', async(req, res) => {
     }
 })
 
+router.get('/findService/:slug', async (req, res) => {
+  const slug = req.params.slug;
+  
+  try {
+    const service = await Service.find({ slug });
+
+    res.status(200).send(service[0]);
+  } catch (error) {
+    return res.status(422).send(error.message);
+  }
+})
+
 router.delete('/deleteService/:id', async (req, res) => {
     const bearer = req.headers.authorization;
 
